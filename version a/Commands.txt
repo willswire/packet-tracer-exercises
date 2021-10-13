@@ -80,7 +80,6 @@ end
 // All Devices
 copy run start
 
-
 // Exercise III – Secure Remote Access //
 
 // All Devices
@@ -215,4 +214,41 @@ end
 
 conf t
 vtp mode server
+end
+
+// Exercise VI – Virtual Local Area Networks (VLAN) //
+
+conf t
+vlan 17
+name USERS
+end
+
+conf t
+vlan 27
+name PRINTERS
+end
+
+conf t
+vlan 37
+name SERVERS
+end
+
+conf t
+vlan 47
+name GCCS
+end
+
+conf t
+vlan 57
+name GCCS
+end
+
+conf t
+vlan 67
+name VOIP
+end
+
+conf t
+vlan 999
+name SHUTDOWN
 end
