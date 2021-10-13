@@ -90,12 +90,13 @@ login local
 exec-timeout 5
 logging synchronous
 transport input ssh 
-exit
+end
+
+configure terminal
 crypto key generate rsa
 yes
 1024
 end
-exit
 
 
 
