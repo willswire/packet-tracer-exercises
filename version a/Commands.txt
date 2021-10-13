@@ -98,5 +98,105 @@ yes
 1024
 end
 
+// Exercise IV – Dynamic Trunking Protocol (DTP)
 
+// F1-3560
+configure terminal
+interface GigabitEthernet0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f1-2911
+end
+
+configure terminal
+interface FastEthernet0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f1-2960
+end
+
+configure terminal
+interface FastEthernet0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f2-2960
+end
+
+configure terminal
+interface FastEthernet0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f3-2960
+end
+
+configure terminal
+interface FastEthernet0/10
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f2-3560
+end
+
+// F2-3560
+configure terminal
+interface GigabitEthernet0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f2-2911
+end
+
+configure terminal
+interface FastEthernet0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f1-2960
+end
+
+configure terminal
+interface FastEthernet0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f2-2960
+end
+
+configure terminal
+interface FastEthernet0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f3-2960
+end
+
+configure terminal
+interface FastEthernet0/10
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description f1-3560
+end
+
+// FX-2960
+configure terminal
+interface GigabitEthernet0/1
+switchport mode trunk
+description f1-3560
+end
+
+configure terminal
+interface GigabitEthernet0/2
+switchport mode trunk
+description f2-3560
+end
+
+// All Switches (varies per device)
+configure terminal
+interface range FastEthernet0/3-9
+switchport mode access
+switchport access vlan 999
+shutdown
+end
+
+configure terminal
+interface GigabitEthernet0/2
+switchport mode access
+switchport access vlan 999
+shutdown
+end
 
