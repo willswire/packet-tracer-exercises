@@ -78,9 +78,10 @@ ip address 192.168.1.31 255.255.255.0
 end
 
 // All Devices
-copy running-config startup-config
+copy run start
 
-// Exercise III – Secure Remote Access
+
+// Exercise III – Secure Remote Access //
 
 // All Devices
 configure terminal
@@ -98,7 +99,7 @@ yes
 1024
 end
 
-// Exercise IV – Dynamic Trunking Protocol (DTP)
+// Exercise IV – Dynamic Trunking Protocol (DTP) //
 
 // F1-3560
 configure terminal
@@ -199,4 +200,21 @@ switchport mode access
 switchport access vlan 999
 shutdown
 end
+
+// Exercise V– VLAN Trunking Protocol (VTP) //
+
+// All Switches
+conf t
+vtp domain vlan.us.af.mil
+vtp password mad
+end
+
+conf t
+vtp mode client
+end
+
+conf t
+vtp mode server
+end
+
 
