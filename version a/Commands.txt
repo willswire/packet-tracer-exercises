@@ -1,15 +1,14 @@
+// Exercise II – Initial Configuration //
+
+// All Devices
 enable
 configure terminal
-hostname f2-2911
+hostname f1-2960
+
 enable secret warrior
+banner motd "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.  You have read & consent to terms in the IS user agreement."
+end
 
-Enable
-configure terminal
-banner motd "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.  You have read and consent to terms in the IS user agreement."
-End
-Disable
-
-enable
 configure terminal
 ip domain-name cos.us.af.mil
 no ip domain-lookup
@@ -21,7 +20,6 @@ login
 exec-timeout 5
 logging synchronous
 end
-disable
 
 // F1-2960
 configure terminal
@@ -30,8 +28,6 @@ ip address 192.168.1.10 255.255.255.0
 description Management
 no shutdown
 end
-disable
-exit
 
 // F2-2960
 configure terminal
@@ -40,8 +36,6 @@ ip address 192.168.1.11 255.255.255.0
 description Management
 no shutdown
 end
-disable
-exit
 
 // F3-2960
 configure terminal
@@ -50,8 +44,6 @@ ip address 192.168.1.12 255.255.255.0
 description Management
 no shutdown
 end
-disable
-exit
 
 // F1-3560
 configure terminal
@@ -60,8 +52,6 @@ ip address 192.168.1.20 255.255.255.0
 description Management
 no shutdown
 end
-disable
-exit
 
 // F2-3560
 configure terminal
@@ -70,14 +60,6 @@ ip address 192.168.1.21 255.255.255.0
 description Management
 no shutdown
 end
-disable
-exit
-
-interface GigabitEthernet0/0.1
-description Management
-encapsulation dot1q 1
-ip address 192.168.1.30 255.255.255.0
-
 
 // F1-2911
 configure terminal
@@ -86,8 +68,6 @@ description Management
 encapsulation dot1q 1
 ip address 192.168.1.30 255.255.255.0
 end
-disable
-exit
 
 // F2-2911
 configure terminal
@@ -96,17 +76,13 @@ description Management
 encapsulation dot1q 1
 ip address 192.168.1.31 255.255.255.0
 end
-disable
-exit
 
-// Command to copy configuration file
-
+// All Devices
 copy running-config startup-config
 
-Exit
+// Exercise III – Secure Remote Access
 
-// Secure Remote Access
-
+// All Devices
 configure terminal
 username student.adm secret ducks
 line vty 0 15
