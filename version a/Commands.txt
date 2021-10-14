@@ -8,6 +8,18 @@ switchport port-security violation shutdown
 switchport port-security maximum 2
 switchport port-security mac-address sticky
 
+// Exercise VII – Spanning Tree Protocol (STP) //
+// F1-3560 
+conf t
+spanning-tree vlan 1,17,27,37 priority 4096
+spanning-tree vlan 47,57,67 priority 8192
+end
+
+// F2-3560 
+conf t
+spanning-tree vlan 47,57,67 priority 4096
+spanning-tree vlan 1,17,27,37 priority 8192
+end
 
 // Exercise VI – Virtual Local Area Networks (VLAN) //
 
