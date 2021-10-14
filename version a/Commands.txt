@@ -1,4 +1,4 @@
-// Exercise VII - Port Security //
+// Exercise VIII - Port Security //
 // All 2960s
 conf t
 int range f0/1-24
