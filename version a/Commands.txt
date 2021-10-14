@@ -1,3 +1,87 @@
+// Exercise X - Implement Sub-Interfaces
+// FX-2911
+conf t
+int g0/0
+no shutdown
+end
+
+// F1-2911
+conf t
+int g0/0.17
+description USERS
+encapsulation dot1q 17
+ip address 129.13.17.2 255.255.255.192
+
+int g0/0.27
+description PRINTERS
+encapsulation dot1q 27
+ip address 129.13.27.66 255.255.255.224
+
+int g0/0.37
+description SERVERS
+encapsulation dot1q 37
+ip address 129.13.37.98 255.255.255.240
+
+int g0/0.47
+description GCCS
+encapsulation dot1q 47
+ip address 129.13.47.130 255.255.255.240
+
+int g0/0.57
+description TBMCS
+encapsulation dot1q 57
+ip address 129.13.57.2 255.255.255.0
+
+int g0/0.67
+description VOIP
+encapsulation dot1q 67
+ip address 129.13.67.2 255.255.255.0
+
+int g0/0.1
+description Management
+encapsulation dot1q 1
+ip address 192.168.1.30 255.255.255.0
+end
+
+// F2-2911
+conf t
+int g0/0.17
+description USERS
+encapsulation dot1q 17
+ip address 129.13.17.3 255.255.255.192
+
+int g0/0.27
+description PRINTERS
+encapsulation dot1q 27
+ip address 129.13.27.67 255.255.255.224
+
+int g0/0.37
+description SERVERS
+encapsulation dot1q 37
+ip address 129.13.37.99 255.255.255.240
+
+int g0/0.47
+description GCCS
+encapsulation dot1q 47
+ip address 129.13.47.131 255.255.255.240
+
+int g0/0.57
+description TBMCS
+encapsulation dot1q 57
+ip address 129.13.57.3 255.255.255.0
+
+int g0/0.67
+description VOIP
+encapsulation dot1q 67
+ip address 129.13.67.3 255.255.255.0
+
+int g0/0.1
+description Management
+encapsulation dot1q 1
+ip address 192.168.1.31 255.255.255.0
+end
+
+
 // Exercise IX - Switched Virtual Interface
 // F1-3560
 conf t
