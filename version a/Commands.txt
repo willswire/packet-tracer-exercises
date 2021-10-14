@@ -1,3 +1,62 @@
+// Exercise IX - Switched Virtual Interface
+// F1-3560
+conf t
+
+int vlan 17
+description USERS
+ip address 129.13.17.4 255.255.255.192
+
+int vlan 27
+description PRINTERS
+ip address 129.13.27.68 255.255.255.224
+
+int vlan 37
+description SERVERS
+ip address 129.13.37.100 255.255.255.240
+
+int vlan 47
+description GCCS
+ip address 129.13.47.132 255.255.255.240
+
+int vlan 57
+description TBMCS
+ip address 129.13.57.4 255.255.255.0
+
+int vlan 67
+description VOIP
+ip address 129.13.67.4 255.255.255.0
+
+end
+
+// F2-3560
+conf t
+
+int vlan 17
+description USERS
+ip address 129.13.17.5 255.255.255.192
+
+int vlan 27
+description PRINTERS
+ip address 129.13.27.69 255.255.255.224
+
+int vlan 37
+description SERVERS
+ip address 129.13.37.101 255.255.255.240
+
+int vlan 47
+description GCCS
+ip address 129.13.47.133 255.255.255.240
+
+int vlan 57
+description TBMCS
+ip address 129.13.57.5 255.255.255.0
+
+int vlan 67
+description VOIP
+ip address 129.13.67.5 255.255.255.0
+
+end
+
 // Exercise VIII - Port Security //
 // All 2960s
 conf t
