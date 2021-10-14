@@ -1,101 +1,95 @@
-// Exercise II – Initial Configuration //
+// Exercise VII - Port Security //
+// 2960s
+conf t
+int range f0/3-24
+switchport mode access
+switchport port-security
+switchport port-security violation shutdown
+switchport port-security maximum 2
+switchport port-security mac-address sticky
 
-// All Devices
-enable
-configure terminal
-hostname f1-2960
 
-enable secret warrior
-banner motd "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.  You have read & consent to terms in the IS user agreement."
+// Exercise VI – Virtual Local Area Networks (VLAN) //
+
+conf t
+vlan 17
+name USERS
 end
 
-configure terminal
-ip domain-name cos.us.af.mil
-no ip domain-lookup
-service timestamps log datetime msec
-service timestamps debug datetime msec
-line console 0
-password cyber
-login
-exec-timeout 5
-logging synchronous
+conf t
+vlan 27
+name PRINTERS
+end
+
+conf t
+vlan 37
+name SERVERS
+end
+
+conf t
+vlan 47
+name GCCS
+end
+
+conf t
+vlan 57
+name GCCS
+end
+
+conf t
+vlan 67
+name VOIP
+end
+
+conf t
+vlan 999
+name SHUTDOWN
 end
 
 // F1-2960
-configure terminal
-interface vlan1
-ip address 192.168.1.10 255.255.255.0
-description Management
-no shutdown
+conf t
+int f0/1
+switchport access vlan 17
+switchport mode access
+int f0/2
+switchport access vlan 27
+switchport mode access
 end
 
 // F2-2960
-configure terminal
-interface vlan1
-ip address 192.168.1.11 255.255.255.0
-description Management
-no shutdown
+conf t
+int f0/1
+switchport access vlan 37
+switchport mode access
+int f0/2
+switchport access vlan 47
+switchport mode access
 end
 
 // F3-2960
-configure terminal
-interface vlan1
-ip address 192.168.1.12 255.255.255.0
-description Management
-no shutdown
+conf t
+int f0/1
+switchport access vlan 57
+switchport mode access
+int f0/2
+switchport access vlan 67
+switchport mode access
 end
 
-// F1-3560
-configure terminal
-interface vlan1
-ip address 192.168.1.20 255.255.255.0
-description Management
-no shutdown
+// Exercise V – VLAN Trunking Protocol (VTP) //
+
+// All Switches
+conf t
+vtp domain vlan.us.af.mil
+vtp password mad
 end
 
-// F2-3560
-configure terminal
-interface vlan1
-ip address 192.168.1.21 255.255.255.0
-description Management
-no shutdown
+conf t
+vtp mode client
 end
 
-// F1-2911
-configure terminal
-interface GigabitEthernet0/0.1
-description Management
-encapsulation dot1q 1
-ip address 192.168.1.30 255.255.255.0
-end
-
-// F2-2911
-configure terminal
-interface GigabitEthernet0/0.1
-description Management
-encapsulation dot1q 1
-ip address 192.168.1.31 255.255.255.0
-end
-
-// All Devices
-copy run start
-
-// Exercise III – Secure Remote Access //
-
-// All Devices
-configure terminal
-username student.adm secret ducks
-line vty 0 15
-login local
-exec-timeout 5
-logging synchronous
-transport input ssh 
-end
-
-configure terminal
-crypto key generate rsa
-yes
-1024
+conf t
+vtp mode server
 end
 
 // Exercise IV – Dynamic Trunking Protocol (DTP) //
@@ -200,55 +194,102 @@ switchport access vlan 999
 shutdown
 end
 
-// Exercise V– VLAN Trunking Protocol (VTP) //
+// Exercise III – Secure Remote Access //
 
-// All Switches
-conf t
-vtp domain vlan.us.af.mil
-vtp password mad
+// All Devices
+configure terminal
+username student.adm secret ducks
+line vty 0 15
+login local
+exec-timeout 5
+logging synchronous
+transport input ssh 
 end
 
-conf t
-vtp mode client
+configure terminal
+crypto key generate rsa
+yes
+1024
 end
 
-conf t
-vtp mode server
+// Exercise II – Initial Configuration //
+
+// All Devices
+enable
+configure terminal
+hostname f1-2960
+
+enable secret warrior
+banner motd "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.  You have read & consent to terms in the IS user agreement."
 end
 
-// Exercise VI – Virtual Local Area Networks (VLAN) //
-
-conf t
-vlan 17
-name USERS
+configure terminal
+ip domain-name cos.us.af.mil
+no ip domain-lookup
+service timestamps log datetime msec
+service timestamps debug datetime msec
+line console 0
+password cyber
+login
+exec-timeout 5
+logging synchronous
 end
 
-conf t
-vlan 27
-name PRINTERS
+// F1-2960
+configure terminal
+interface vlan1
+ip address 192.168.1.10 255.255.255.0
+description Management
+no shutdown
 end
 
-conf t
-vlan 37
-name SERVERS
+// F2-2960
+configure terminal
+interface vlan1
+ip address 192.168.1.11 255.255.255.0
+description Management
+no shutdown
 end
 
-conf t
-vlan 47
-name GCCS
+// F3-2960
+configure terminal
+interface vlan1
+ip address 192.168.1.12 255.255.255.0
+description Management
+no shutdown
 end
 
-conf t
-vlan 57
-name GCCS
+// F1-3560
+configure terminal
+interface vlan1
+ip address 192.168.1.20 255.255.255.0
+description Management
+no shutdown
 end
 
-conf t
-vlan 67
-name VOIP
+// F2-3560
+configure terminal
+interface vlan1
+ip address 192.168.1.21 255.255.255.0
+description Management
+no shutdown
 end
 
-conf t
-vlan 999
-name SHUTDOWN
+// F1-2911
+configure terminal
+interface GigabitEthernet0/0.1
+description Management
+encapsulation dot1q 1
+ip address 192.168.1.30 255.255.255.0
 end
+
+// F2-2911
+configure terminal
+interface GigabitEthernet0/0.1
+description Management
+encapsulation dot1q 1
+ip address 192.168.1.31 255.255.255.0
+end
+
+// All Devices
+copy run start
