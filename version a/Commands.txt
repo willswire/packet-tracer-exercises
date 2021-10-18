@@ -1,3 +1,39 @@
+// Final Save Script
+copy run start
+
+exit
+
+// Exercise XIII – Access Control Lists (ACLs)
+
+// FX-2911
+conf t
+ip access-list extended 109 
+permit tcp 220.220.240.8 0.0.0.0 any eq 22 
+deny tcp any any eq 22
+permit ip any any
+end
+
+conf t
+interface GigabitEthernet0/2
+ip access-group 109 in
+end
+
+copy run start
+
+exit
+
+// All Devices
+conf t
+ip access-list standard 17 
+permit 220.220.240.8 0.0.0.0
+permit 192.168.1.0 0.0.0.255
+line vty 0 15
+access-class 17 in
+end
+copy run start
+
+exit
+
 // Exercise XII – Enhanced Interior Gateway Routing Protocol (EIGRP)
 
 // F1-2911
