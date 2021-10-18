@@ -36,22 +36,20 @@ exit
 
 // Exercise XII – Enhanced Interior Gateway Routing Protocol (EIGRP)
 
-// F1-2911
+// FX-2911
 conf t
 router eigrp 690
 network 129.13.17.0 0.0.0.63
 network 129.13.27.64 0.0.0.31
 network 129.13.37.96 0.0.0.15
-no auto-summary
-end
-copy run start
+network 129.13.47.128 0.0.0.15
+network 129.13.57.0 0.0.0.255
+network 129.13.67.0 0.0.0.255
+network 192.168.1.0 0.0.0.255
+network 129.13.200.252 0.0.0.3
+network 130.20.100.0 0.0.0.3
+network 130.20.100.4 0.0.0.3
 
-// F2-2911
-conf t
-router eigrp 690
-network 129.13.17.0 0.0.0.63
-network 129.13.27.64 0.0.0.31
-network 129.13.37.96 0.0.0.15
 no auto-summary
 end
 copy run start
