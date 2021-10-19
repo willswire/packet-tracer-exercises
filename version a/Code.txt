@@ -1,0 +1,139 @@
+**** Configure Hostname ****
+enable
+conf t
+hostname 
+
+**** Configure banner ****
+enable
+conf t
+banner motd "You are now accessing a DoD IS."
+end
+
+**** Configure IP Domain ****
+conf t
+ip domain-name bldg1002.us.af.mil
+no ip domain-lookup
+service timestamps log datetime msec
+service timestamps debug datetime msec
+line console 0
+end
+
+**** Configure Interfaces ****
+
+//b1002-f1-2960
+conf t
+interface fa0/5
+description VLAN 11
+no shutdown
+interface fa0/11
+description VLAN 12
+no shutdown
+interface g0/1
+description b1002-f1-3560
+no shutdown
+interface g0/2
+description b1002-f2-3560
+no shutdown
+end
+
+//b1002-f2-2960
+conf t
+interface fa0/12
+description VLAN 16
+no shutdown
+interface fa0/01
+description VLAN 27
+no shutdown
+interface g0/1
+description b1002-f1-3560
+no shutdown
+interface g0/2
+description b1002-f2-3560
+no shutdown
+end
+
+//b1002-f3-2960
+conf t
+interface fa0/1
+description VLAN 50
+no shutdown
+interface fa0/2
+description VLAN 31
+no shutdown
+interface g0/1
+description b1002-f1-3560
+no shutdown
+interface g0/2
+description b1002-f2-3560
+no shutdown
+end
+
+//b1002-f1-3560
+conf t
+interface fa0/1
+description b1002-f1-2960
+no shutdown
+interface fa0/2
+description b1002-f2-2960
+no shutdown
+interface fa0/3
+description b1002-f3-2960
+no shutdown
+interface fa0/4
+description b1002-f2-3560
+no shutdown
+interface g0/1
+description b1002-f1-2911
+no shutdown
+end
+
+//b1002-f2-3560
+conf t
+interface fa0/1
+description b1002-f1-2960
+no shutdown
+interface fa0/2
+description b1002-f2-2960
+no shutdown
+interface fa0/3
+description b1002-f3-2960
+no shutdown
+interface fa0/4
+description b1002-f1-3560
+no shutdown
+interface g0/1
+description b1002-f2-2911
+no shutdown
+end
+
+//b1002-f1-2911
+conf t
+interface g0/1
+description b1002-f1-3560
+no shutdown
+interface g0/0
+description b1002-f2-2911
+no shutdown
+interface g0/2
+description ISP
+no shutdown
+end
+
+
+//b1002-f2-2911
+conf t
+interface g0/1
+description b1002-f2-3560
+no shutdown
+interface g0/0
+description b1002-f1-2911
+no shutdown
+interface g0/2
+description ISP
+no shutdown
+end
+
+**** Save Configuration ****
+copy run start
+
+
