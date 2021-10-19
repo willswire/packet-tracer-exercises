@@ -137,3 +137,22 @@ end
 copy run start
 
 
+**** Management VLAN ****
+en
+conf t
+interface vlan1
+ip address 10.200.233.31 255.255.255.0
+description Management
+no shutdown
+end
+
+**** Disable Unused Ports ****
+en
+conf t
+int range g0/2
+switchport mode access
+switchport access vlan 5
+shutdown
+end
+exit
+
