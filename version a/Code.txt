@@ -330,6 +330,32 @@ end
 exit
 
 
+*** ASN ***
 
+
+conf t
+router eigrp 81
+network 200.195.1.224 0.0.0.15
+network 200.195.1.192 0.0.0.31
+network 200.195.1.160 0.0.0.31
+network 200.195.1.128 0.0.0.31
+network 200.195.1.0 0.0.0.63
+network 200.195.1.64 0.0.0.63
+network 10.200.233.0 0.0.0.255
+network 132.25.10.252 0.0.0.3
+network 200.195.1.252 0.0.0.3
+no auto-summary
+end
+exit
+
+**** Router Interface Config ****
+
+
+conf t 
+int g0/0
+ip address 132.25.10.254 255.255.255.252
+description PTP
+end
+exit
 
 
