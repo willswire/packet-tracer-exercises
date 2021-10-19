@@ -231,3 +231,86 @@ end
 exit
 
 
+**** VLANS ****
+en 
+conf t
+vlan 5
+name shutdown
+vlan 11
+name sfs-users
+vlan 12
+name cons-users
+vlan 16
+name cyber-users
+vlan 27
+name pa-users
+vlan 50
+name ce-users
+vlan 31
+name fss-users
+vlan 1
+name Management
+end
+exit
+
+
+en
+conf t
+int fa0/2
+switchport access vlan 31
+switchport mode access 
+end
+exit
+
+
+**** STP ****
+
+en
+conf t
+spanning-tree vlan 11,12,16 priority 8192
+spanning-tree vlan 27,50,31 priority 4096
+end
+exit
+
+**** Port Security ****
+
+
+en
+conf t
+interface range fa0/01-24
+switchport mode access
+switchport port-security
+switchport port-security violation shutdown
+switchport port-security maximum 2
+switchport port-security mac-address sticky
+end
+exit
+
+**** SVI ****
+
+en
+conf t
+int vlan 
+description shutdown
+ip address 200.195.1.228 255.255.255.240
+int vlan 
+description cons-users
+ip address 200.195.1.196 255.255.255.224
+int vlan
+description cyber-users
+ip address 200.195.1.164 255.255.255.224
+int vlan
+description pa-users
+ip address 200.195.1.132 255.255.255.224
+int vlan
+description ce-users
+ip address 200.195.1.4 255.255.255.192
+int vlan
+description fss-users
+ip address 200.195.1.68 255.255.255.192
+int vlan
+description Management
+ip address 10.200.233.20 255.255.255.0
+end
+exit
+
