@@ -11,7 +11,7 @@ end
 
 **** Configure IP Domain ****
 conf t
-ip domain-name bldg1002.us.af.mil
+ip domain-name us.af.mil
 no ip domain-lookup
 service timestamps log datetime msec
 service timestamps debug datetime msec
@@ -134,8 +134,11 @@ no shutdown
 end
 
 **** Save Configuration ****
+
+en
 copy run start
 
+exit
 
 **** Management VLAN ****
 en
@@ -146,6 +149,13 @@ description Management
 no shutdown
 end
 
+// routers
+interface GigabitEthernet0/0.1
+fX-2911 (config-subif)# description Management
+fX-2911 (config-subif)# encapsulation dot1q 1
+fX-2911 (config-subif)# ip address 192.168.1.Y 255.255.255.0
+
+
 **** Disable Unused Ports ****
 en
 conf t
@@ -155,4 +165,69 @@ switchport access vlan 5
 shutdown
 end
 exit
+
+**** Trunking ****
+// Distribution Layer
+conf t
+
+interface g0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface fa0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface fa0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface fa0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface fa0/4
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+end
+exit
+
+// Access Layer
+en
+conf t
+
+interface g0/1
+switchport mode trunk
+
+interface g0/2
+switchport mode trunk
+
+end
+exit
+
+// All switches
+en
+conf t
+vtp domain bldg1002.us.af.mil
+vtp password samurai
+end
+exit
+
+**** SSH ****
+en
+conf t
+username uct.ninja secret cyber
+line vty 0 15
+login local
+exec-timeout 5
+logging synchronous
+transport input ssh
+crypto key generate rsa
+yes
+1024
+
+end
+exit
+
 
