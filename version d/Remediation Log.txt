@@ -1,0 +1,71 @@
+// Remote-3560 Configuration
+
+0848 - STARTEX
+
+0850 - Cannot login to Remote-3560 console. Will attempt to SSH for remote administration and configuration of hostname.
+
+0855 - Successfully logged in to Remote-3560 from MGMT PC on VLAN 1. SSH password and username are set correctly.
+
+0858 - Successfully set hostname on Remote-3560. Trouble Ticket resolved. Observed that banner did not match LAN configuration, but decided not to pursue. Saved file, and closed trouble Ticket. 
+AWARDED 10%
+
+0900 - Check login access and banner across all devices. f1-2911, f2-2911, f1-3560, f2-3560, f1-2960, f2-2960 all appear to have correct login credentials and welcome banner set.
+
+0903 - Check port security, status, descriptions, and trunking protocols on F2-2906. Discovered that g0/1 is set to switchport mode access. Set to switchport mode trunk. Access light changed from orange to green.
+AWARDED 10%
+
+0910 - Check port security, status, descriptions, and trunking protocols on F1-2906, F2-2960, F1-3560, F2-3560, F1-2911. No discrepencies on first pass.
+
+0928 - While performing initial SHOW RUN diagnostic, discovered that IP hostname is incorrectly set to keesler.afb.mil on F2-2911. Set to correct address of keesler.af.mil
+AWARDED 6%
+
+0930 - Disable IP domain lookup on F2-2911. 
+AWARDED 4%
+
+0931 - Begin vtp diagnosis check.
+
+0932 - Discovered that F1-2911 is incorrectly set as VTP server. Configuring the device to client mode.
+
+0934 - Remembered that 2911 devices are always configured as Server in VTP mode. Checking vtp status and vtp passwords on all distribution and access devices.
+
+0937 - Discovered that VTP password is incorrectly set on F1-2960. Changed password.
+AWARDED 10%
+
+0940 - Diagnose VLAN issues. Start at server F1-3560.
+
+0942 - Discovered that VLAN 17 is incorreclty named (typo). Renamed to remove space.
+AWARDED 10%
+
+0948 - Diagnose EIGRP mode on routers.
+
+0953 - No visible issues with EIGRP.
+
+0953 - Attempt SSH connection to all managed devices.
+
+0955 - Discovered that SSH password for 192.168.1.1 (f1-2960) is set incorrectly. Changed to ducks.
+AWARDED 10%
+
+0958 - SSH to 192.168.1.4 (f2-3560) is timing out. Check to see if it is configured.
+
+1000 - Telnet was configured as transport input on line vty 0 4 of F2-3560. Changed to SSH.
+AWARDED 10%
+
+1002 - Check for STP priorities. 
+
+1005 - Priorities appear correct.
+
+1010 - SSH is still not working after password reset on F2-3560. Diagnosing Management VLAN shows an incorrect IP. Changed to correct IP.
+AWARDED 10%
+
+1019 - Comparing layer SHOW RUN command outputs to identify remaining issues. Found additional line in f1-2960 config. Corrected line, but no points awarded.
+
+1024 - Discovered that siwtchport nonegotiate is missing from g0/1 on F1-3560. Did not award points.
+
+1039 - INSTR ASSIST: f1-2911 access control list is incorrectly applied to traffic OUT on g0/2. Change to traffic IN.
+AWARDED 10%
+
+1040 - compare devices on core layer
+
+1048 - ENDEX
+
+1200 - Andrew showed me that the subnet mask is wrong on F2-2911

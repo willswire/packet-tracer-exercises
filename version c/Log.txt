@@ -1,0 +1,125 @@
+0835 - Connected patch cable between Inni-D1 and Inni-D2
+AWARDED 2 PTS
+
+0836 - Assess remaining link lights, specifically on Inni-A1 and Inni-A3
+
+0840 - All physical links appear to be up. Orange link lights likely caused by higher layer issues. 
+
+0841 - Begin diagnosis with Inni-A1
+
+// Inni-A1
+- Confirmed banner message is correct
+- Confirmed console password and enable secret is correct
+
+** Show Run Output Issues
+NONE
+
+** Show VLAN Output Issues
+None of the VLANs designated in the supplement are visible. 
+
+** Show VTP Output Issues
+
+0855 - Discovered VTP password is incorrect on Inni-A1. Setting to propper term.
+AWARDED 1 PTS
+
+0858 - Link light goes green on PC2 <-> Inni-A1
+
+0859 - Begin diagnosis with Inni-A2
+
+// Inni-A2
+
+** Show Run Output Issues
+banner motd ^CThis is a glaring error... fix it.^C
+AWARDED 1 PTS
+
+** Show VLAN Output Issues
+NONE
+
+** Show VTP Output Issues
+NONE
+
+0905 - Moving on to Inni-A3
+
+// Inni-A3
+
+** Show Run Output Issues
+
+interface FastEthernet0/3
+ switchport access vlan 33 // should be vlan 31
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky 
+!
+
+0910 - Corrected VLAN issue on fa0/3 of Inni-A3
+AWARDED 1 PTS
+
+0910 - Moving on to Inni-D1
+
+// Inni-D1
+
+ip domain-name officespace.com
+! // need to disable ip lookup
+!
+spanning-tree mode pvst
+spanning-tree vlan 1,12,16,31 priority 12288 // remove vlan 1
+
+0920 - Implement fixes for issues above
+AWARDED 2 PTS
+
+0925 - Moving on to Inni-D2, discovered cannot login in. Will attempt to ssh from Inni-D1
+
+0927 - Reset Inni-D2 password via SSH connection.
+AWARED 1 PTS
+
+// Inni-D2
+
+spanning-tree vlan 1,12,16,31 priority 16384 // Remove VLAN 1
+no points awarded
+
+interface GigabitEthernet0/1 // remove description
+ description Inni-R1
+ switchport access vlan 99
+ switchport mode access
+ switchport nonegotiate
+ shutdown
+!
+AWARDED 1 PTS
+
+something funny about VLAN... will inspect
+
+no VLAN issues visible
+
+0935 - Inspect Inni-R1
+
+0944 - No issues
+
+0945 Inspect Inni-R2
+
+interface GigabitEthernet0/0.61
+ description channel 5
+ encapsulation dot1Q 61
+ ip address 200.20.61.194 255.255.255.192 // should be .195
+!
+AWARDED 1 PTS
+
+access-list 98 permit host 98.87.44.111
+access-list 98 permit 198.34.203.64 0.0.0.31
+access-list 98 permit any // remove
+access-list 123 permit tcp host 98.87.44.111 any eq 22
+access-list 123 deny tcp any any eq 22
+access-list 123 permit ip any any
+AWARDED 1 PTS
+
+0957 - Attempt SSH access
+
+1000 - Compare same-layer devices
+
+1003 - Discovered Inni-R1 is missing int g0/0.16
+interface GigabitEthernet0/0.16
+ description Inni Tek
+ encapsulation dot1Q 16
+ ip address 131.31.16.2 255.255.255.0
+!
+AWARDED 3 PTS
